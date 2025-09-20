@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "409815440484",
+    "project_id": "my-weatherapp-project1-rashik",
+    "storage_bucket": "my-weatherapp-project1-rashik.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409815440484:android:b6e20b1471830abbbf5371",
+        "android_client_info": {
+          "package_name": "com.example.weatherapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdcOZV38q0YggkyPFEmuUypYlEh3Ij2V8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

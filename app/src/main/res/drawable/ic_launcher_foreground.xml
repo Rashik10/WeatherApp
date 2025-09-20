@@ -1,30 +1,44 @@
+<!-- res/drawable/ic_launcher_foreground.xml -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path android:pathData="M31,63.928c0,0 6.4,-11 12.1,-13.1c7.2,-2.6 26,-1.4 26,-1.4l38.1,38.1L107,108.928l-32,-1L31,63.928z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:endX="85.84757"
-                android:endY="92.4963"
-                android:startX="42.9492"
-                android:startY="49.59793"
-                android:type="linear">
-                <item
-                    android:color="#44000000"
-                    android:offset="0.0" />
-                <item
-                    android:color="#00000000"
-                    android:offset="1.0" />
-            </gradient>
-        </aapt:attr>
-    </path>
-    <path
-        android:fillColor="#FFFFFF"
-        android:fillType="nonZero"
-        android:pathData="M65.3,45.828l3.8,-6.6c0.2,-0.4 0.1,-0.9 -0.3,-1.1c-0.4,-0.2 -0.9,-0.1 -1.1,0.3l-3.9,6.7c-6.3,-2.8 -13.4,-2.8 -19.7,0l-3.9,-6.7c-0.2,-0.4 -0.7,-0.5 -1.1,-0.3C38.8,38.328 38.7,38.828 38.9,39.228l3.8,6.6C36.2,49.428 31.7,56.028 31,63.928h46C76.3,56.028 71.8,49.428 65.3,45.828zM43.4,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2c-0.3,-0.7 -0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C45.3,56.528 44.5,57.328 43.4,57.328L43.4,57.328zM64.6,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2s-0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C66.5,56.528 65.6,57.328 64.6,57.328L64.6,57.328z"
-        android:strokeWidth="1"
-        android:strokeColor="#00000000" />
+
+    <!-- Position the composition (no outside white space) -->
+    <group android:translateX="10" android:translateY="16">
+
+        <!-- Sun (top-left) -->
+        <path android:fillColor="#FFC73A"
+            android:pathData="M24,10a14,14 0 1,0 0,28a14,14 0 1,0 0,-28z"/>
+        <path android:fillColor="#FFB300"
+            android:pathData="M24,15a9,9 0 1,0 0,18a9,9 0 1,0 0,-18z"/>
+
+        <!-- Cloud (center-right) -->
+        <path android:fillColor="#FFFFFF"
+            android:fillAlpha="0.98"
+            android:pathData="M72,46c6.6,0 12,5.4 12,12s-5.4,12 -12,12H32c-7.7,0 -14,-6.3 -14,-14
+                c0,-7 5.1,-12.8 11.8,-13.8c1.7,-8.6 9.2,-15.2 18,-15.2
+                c10.2,0 18.2,8 18.2,18v1z"/>
+
+        <!-- Subtle cloud shadow -->
+        <path android:fillColor="#000000" android:fillAlpha="0.09"
+            android:pathData="M72,68H32c-5.4,0 -9.9,-2.6 -12.3,-6.5c1.7,1.6 4.3,2.9 7.7,2.9h36.5
+                c3.5,0 6.6,-1.3 8.7,-3.5c-1.1,5.5 -6.0,7.1 -8.6,7.1z"/>
+
+        <!-- Raindrops (bottom) -->
+        <path android:fillColor="#52B6FF"
+            android:pathData="M38,70c0,4.2 3.3,7.6 7.3,7.6s7.3,-3.4 7.3,-7.6c0,-5.5 -5.6,-10.9 -7.3,-14.2
+                c-1.7,3.3 -7.3,8.7 -7.3,14.2z"/>
+        <path android:fillColor="#39A2F6"
+            android:pathData="M60,72c0,3.2 2.6,5.8 5.7,5.8c3.1,0 5.7,-2.6 5.7,-5.8c0,-4.1 -4.3,-8.1 -5.7,-10.6
+                c-1.3,2.5 -5.7,6.5 -5.7,10.6z"/>
+        <path android:fillColor="#39A2F6"
+            android:pathData="M28,72c0,2.6 2.1,4.6 4.6,4.6c2.6,0 4.6,-2.1 4.6,-4.6c0,-3.4 -3.5,-6.7 -4.6,-8.7
+                c-1.0,2.0 -4.6,5.3 -4.6,8.7z"/>
+
+        <!-- Small star (top-right) -->
+        <path android:fillColor="#E6F2FF"
+            android:pathData="M83,20l2.2,4.8l5.0,0.6l-3.7,3.6l0.9,5.0l-4.4,-2.5l-4.4,2.5l0.9,-5.0l-3.7,-3.6l5.0,-0.6z"/>
+    </group>
 </vector>

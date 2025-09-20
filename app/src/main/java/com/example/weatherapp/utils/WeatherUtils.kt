@@ -9,9 +9,22 @@ object WeatherUtils {
     fun getWeatherIconUrl(iconCode: String): String {
         return "https://openweathermap.org/img/wn/$iconCode@2x.png"
     }
+
+    fun formatPosition(value: Double): String {
+        return "%.3f°".format(value)
+    }
     
     fun formatTemperature(temp: Double): String {
         return "${temp.roundToInt()}°C"
+    }
+
+    fun formatPressure(pressureHpa: Int?): String {
+        return "$pressureHpa hPa"
+    }
+    
+    fun formatWindSpeed(speedMPerSec: Double): String {
+        val speedKmPerHour = speedMPerSec * 3.6
+        return "%.1f km/h".format(speedKmPerHour)
     }
     
     fun formatTime(timestamp: Long): String {

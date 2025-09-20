@@ -1,8 +1,6 @@
 package com.example.weatherapp.ui.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -13,6 +11,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.weatherapp.data.*
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 import com.example.weatherapp.utils.WeatherUtils
@@ -40,15 +39,28 @@ fun CurrentWeatherCard(
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold
             )
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             // Weather description
-            Text(
-                text = WeatherUtils.capitalizeFirst(weather.weather[0].description),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = WeatherUtils.capitalizeFirst(weather.weather[0].description),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                // Weather icon
+                AsyncImage(
+                    model = WeatherUtils.getWeatherIconUrl(weather.weather[0].icon),
+                    contentDescription = "Weather icon",
+                    modifier = Modifier.size(32.dp)
+                )
+            }
             
             Spacer(modifier = Modifier.height(16.dp))
             
@@ -89,7 +101,49 @@ fun CurrentWeatherCard(
                 )
                 WeatherDetailItem(
                     label = "Wind",
-                    value = "${weather.wind.speed} m/s ${WeatherUtils.getWindDirection(weather.wind.deg)}"
+                    value = "${WeatherUtils.formatWindSpeed(weather.wind.speed)} ${WeatherUtils.getWindDirection(weather.wind.deg)}"
+                )
+            }
+            
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            // Location and pressure details
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                WeatherDetailItem(
+                    label = "Pressure",
+                    value = WeatherUtils.formatPressure(weather.main.pressure)
+                )
+                WeatherDetailItem(
+                    label = "Visibility",
+                    value = "${weather.visibility / 1000} km"
+                )
+                WeatherDetailItem(
+                    label = "Sea Level",
+                    value = WeatherUtils.formatPressure(weather.main.seaLevel)
+                )
+                WeatherDetailItem(
+                    label = "Ground Level",
+                    value = WeatherUtils.formatPressure(weather.main.grndLevel)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // Position Details
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                PositionDetailItem(
+                    label = "Latitude:",
+                    value = WeatherUtils.formatPosition(weather.coord.lat)
+                )
+                PositionDetailItem(
+                    label = "Longitude:",
+                    value = WeatherUtils.formatPosition(weather.coord.lon)
                 )
             }
         }
@@ -121,6 +175,33 @@ fun WeatherDetailItem(
     }
 }
 
+@Composable
+fun PositionDetailItem(
+    label: String,
+    value: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Spacer(modifier = Modifier.width(6.dp))
+        Text(
+            text = value,
+            style = MaterialTheme.typography.bodyMedium,
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Medium,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
 @Preview(showBackground = true, widthDp = 360, heightDp = 600)
 @Composable
 fun CurrentWeatherCardPreview() {
@@ -138,6 +219,17 @@ fun WeatherDetailItemPreview() {
         WeatherDetailItem(
             label = "Humidity",
             value = "65%"
+        )
+    }
+}
+
+@Preview(showBackground = true, widthDp = 180, heightDp = 120)
+@Composable
+fun PositionDetailItemPreview() {
+    WeatherAppTheme {
+        PositionDetailItem(
+            label = "Latitude",
+            value = "51.509"
         )
     }
 }
@@ -161,7 +253,9 @@ private fun sampleWeatherResponse(): WeatherResponse {
             tempMin = 18.0,
             tempMax = 26.0,
             pressure = 1013,
-            humidity = 65
+            humidity = 65,
+            seaLevel = 1020,
+            grndLevel = 1005
         ),
         visibility = 10000,
         wind = Wind(speed = 3.5, deg = 220),
